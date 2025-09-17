@@ -1,0 +1,8 @@
+services:
+  efcorecodedemo:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8080:8080"
+    command: >
+      dotnet EFCoreCodeFirstDemo.dll --urls http://+:8080
