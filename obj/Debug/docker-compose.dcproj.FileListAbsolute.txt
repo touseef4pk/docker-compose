@@ -1,0 +1,1 @@
+D:\DotNetProjects\EFCoreCodeFirstDemo\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache

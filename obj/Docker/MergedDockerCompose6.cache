@@ -1,0 +1,50 @@
+name: dockercompose375073044490808248
+services:
+  efcorecodedemo:
+    build:
+      context: D:\Touseef Doc\Video Tutorials\Docker Compose .Net Core\EFCoreCodeFirstDemo
+      dockerfile: EFCoreCodeFirstDemo/Dockerfile
+    command:
+      - dotnet
+      - EFCoreCodeFirstDemo.dll
+      - --urls
+      - http://+:8080
+    container_name: efcorecodedemo
+    depends_on:
+      sqlserver:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__Default: Server=sqlserver;Database=EFCoreDemoDB;User Id=sa;Password=123;
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "5000"
+        protocol: tcp
+      - mode: ingress
+        target: 8081
+        published: "5001"
+        protocol: tcp
+      - mode: ingress
+        target: 8080
+        published: "8080"
+        protocol: tcp
+  sqlserver:
+    container_name: sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: Your_password123
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 1433
+        published: "1433"
+        protocol: tcp
+networks:
+  default:
+    name: dockercompose375073044490808248_default
